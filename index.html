@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepesh Jangid - AI/ML Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 234, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-100vh) translateX(100px); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 234, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00eaff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00eaff;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00eaff, #0080ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5em;
+            color: #00eaff;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-content .description {
+            font-size: 1.2em;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00eaff, #0080ff);
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 234, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00eaff;
+            border: 2px solid #00eaff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 234, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #00eaff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 234, 255, 0.1), transparent);
+            transform: scale(0);
+            transition: transform 0.6s;
+        }
+
+        .skill-card:hover::before {
+            transform: scale(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #00eaff;
+            box-shadow: 0 20px 50px rgba(0, 234, 255, 0.3);
+        }
+
+        .skill-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #00eaff;
+        }
+
+        .skill-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding: 50px 0;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #00eaff;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00eaff;
+            box-shadow: 0 0 20px #00eaff;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(20px);
+            background: rgba(0, 234, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 234, 255, 0.2);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.8em;
+            color: #00eaff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item .company {
+            font-size: 1.3em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item .duration {
+            color: #888;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .timeline-item p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 80px 50px;
+            margin: 50px;
+            border: 1px solid rgba(0, 234, 255, 0.3);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: rgba(0, 234, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 234, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: #00eaff;
+            box-shadow: 0 10px 30px rgba(0, 234, 255, 0.3);
+        }
+
+        .contact-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .contact-card a {
+            color: #00eaff;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid rgba(0, 234, 255, 0.2);
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3em;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 50px 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav>
+        <div class="logo">DJ</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>DEEPESH JANGID</h1>
+            <p class="subtitle">AI/ML Engineer | Pioneering the Future of Intelligence</p>
+            <p class="description">
+                Specializing in Large Language Models, Docker, and cutting-edge Machine Learning solutions. 
+                Transforming complex data into intelligent systems that drive innovation.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/deepesh-jangid-264289246" target="_blank" class="btn btn-secondary">View LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <h2 class="section-title">Core Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <h3>Large Language Models</h3>
+                <p>Expert in implementing and fine-tuning LLMs for various applications including GPT, BERT, and transformer architectures</p>
+            </div>
+            <div class="skill-card">
+            <div class="skill-icon">📊</div>
+            <h3>AI, ML & Data Science</h3>
+            <p>Strong foundation in Machine Learning, NLP, AI chatbots, regression models, data analysis, data visualization, and computer vision.</p>
+        </div>
+            <div class="skill-card">
+                <div class="skill-icon">🤖</div>
+                <h3>AI Tools & Models</h3>
+                <p>Worked with n8n, LangChain, and open-source LLMs to build intelligent agents, automation pipelines, and AI-powered workflows.</p>
+            </div>
+          <div class="skill-card">
+            <div class="skill-icon">🛠️</div>
+            <h3>Libraries & Tools</h3>
+            <p>Hands-on experience with TensorFlow, scikit-learn, Pandas, NumPy, Matplotlib, Selenium, PyInstaller, Firebase, Streamlit, and SQL.</p>
+        </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Programming Languages</h3>
+                <p>Proficient in Python, C++, and C for building efficient algorithms, backend services, and data-driven applications.</p>
+            </div>
+
+
+
+            
+            <div class="skill-card">
+                <div class="skill-icon">🐳</div>
+                <h3>Docker & DevOps</h3>
+                <p>Containerization expert with extensive experience in deploying scalable ML models using Docker and Kubernetes</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h3>Word Embeddings</h3>
+                <p>Proficient in Word2Vec, GloVe, and FastText for natural language processing and semantic analysis</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <h3>Python & ML Libraries</h3>
+                <p>Advanced proficiency in Python, TensorFlow, PyTorch, Scikit-learn, and Pandas for ML development</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔮</div>
+                <h3>Predictive Modeling</h3>
+                <p>Building sophisticated predictive models for forecasting, classification, and regression problems</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📈</div>
+                <h3>Data Visualization</h3>
+                <p>Creating compelling visualizations using Matplotlib, Seaborn, and Plotly to communicate insights effectively</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="experience">
+        <h2 class="section-title">Professional Journey</h2>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <h3>AI Engineer</h3>
+                <div class="company">WeVOIS Labs Pvt. Ltd.</div>
+                <div class="duration">Jan 2025 - Present | Jaipur, Rajasthan</div>
+                <p>Leading AI initiatives and developing cutting-edge machine learning solutions. Working with state-of-the-art technologies to build intelligent systems that solve real-world problems. Collaborating with cross-functional teams to deliver impactful AI-driven products.
+                Accelerated learning in machine learning, data analysis, and AI-driven solutions. Worked on multiple high-impact projects involving NLP, computer vision, and predictive analytics. Built and deployed ML models in production environments.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Data Science Intern</h3>
+                <div class="company">Celebal Technologies</div>
+                <div class="duration">June 2024 - August 2024 (3 months) | Jaipur, Rajasthan</div>
+                <p>Gained hands-on experience with enterprise-level data science projects. Implemented machine learning algorithms for business intelligence and automated data processing pipelines. Worked with large datasets and cloud technologies.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Machine Learning Intern</h3>
+                <div class="company">CODTECH IT SOLUTIONS</div>
+                <div class="duration">April 2024 - May 2024 (2 months)</div>
+                <p>Developed and deployed machine learning models addressing real-world challenges. Enhanced expertise in data analysis, algorithm development, and predictive modeling. Collaborated with experienced professionals to learn industry best practices.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Machine Learning Intern</h3>
+                <div class="company">FoxTradingSolutions</div>
+                <div class="duration">August 2023 - September 2023 (2 months)</div>
+                <p>Applied machine learning techniques to financial trading systems. Developed predictive models for market analysis and algorithmic trading. Gained valuable experience in the intersection of ML and fintech.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="projects">
+    <h2 class="section-title">Key Projects & Implementations</h2>
+
+    <div class="experience-timeline">
+
+        <div class="timeline-item">
+            <h3>Multi-Agent Chatbot for SQL Analytics (A2A Protocol)</h3>
+            
+            <p>
+                Developed a multi-agent chatbot using the Agent2Agent (A2A) protocol where user queries flow through
+                specialized agents for SQL generation, follow-up reasoning, and decision-making (tabular output vs.
+                chart visualization). Integrated Firebase for data storage, LLMs for reasoning, and visualization
+                libraries to deliver explainable analytics in real time.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>AI-Powered Chatbot for SOP Compliance Analytics</h3>
+            
+            <p>
+                Built an AI-driven chatbot to automate SOP compliance analysis using Google Gemini and Streamlit.
+                Implemented intelligent SOP filtering, AI-based pathfinding, and role-specific insight delivery.
+                Reduced manual compliance review time by 60% while enabling real-time decision support.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>SMS Fraud Detection System</h3>
+            
+            <p>
+                Designed and implemented a fraud SMS detection pipeline using classical machine learning techniques.
+                Performed feature engineering, model training, evaluation, and accuracy tuning to reliably classify
+                spam and fraudulent messages.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Computer Vision-Based Bin Fill Level Detection</h3>
+           
+            <p>
+                Developed a real-time bin-fill percentage detection system using YOLOv8 and regression models.
+                Created custom annotated datasets and deployed a visual monitoring pipeline to support predictive
+                waste collection and overflow prevention.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <h3>Automated Web Task Executor (.exe)</h3>
+            
+            <p>
+                Built automation scripts for web-based workflows including authentication, dropdown handling,
+                and data scraping using Selenium. Packaged end-to-end automation into standalone .exe files using
+                PyInstaller for seamless deployment to non-technical users.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+    <section class="section">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🎓</div>
+                <h3>Bachelor of Technology</h3>
+                <p><strong>Computer Science</strong><br>Arya College of Engineering & Research Center, Jaipur<br>2021 - 2025</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🏆</div>
+                <h3>BCG - GenAI Job Simulation</h3>
+                <p>Comprehensive training in Generative AI applications and business use cases. Explored cutting-edge AI technologies and their implementation strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="font-size: 1.2em; color: #aaa; margin-bottom: 30px;">
+            Open to exciting opportunities in AI/ML Engineering. Let's build the future together!
+        </p>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:itsdeepesh007@gmail.com">itsdeepesh007@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">📱</div>
+                <h3>Phone</h3>
+                <a href="tel:8690091729">+91 8690091729</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">💼</div>
+                <h3>LinkedIn</h3>
+                <a href="https://www.linkedin.com/in/deepesh-jangid-264289246" target="_blank">Connect on LinkedIn</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">📍</div>
+                <h3>Location</h3>
+                <p style="color: #00eaff;">Jaipur, Rajasthan, India</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Deepesh Jangid | AI/ML Engineer | Built with passion for innovation</p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
